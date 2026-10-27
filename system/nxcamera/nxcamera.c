@@ -79,6 +79,7 @@ static void pan_display(int fb_device, FAR struct fb_planeinfo_s *plane_info)
 {
   struct pollfd pfd;
   int ret;
+
   pfd.fd = fb_device;
   pfd.events = POLLOUT;
 
@@ -133,6 +134,7 @@ static int show_image(FAR struct nxcamera_s *pcam, FAR v4l2_buffer_t *buf)
           int ret;
           FAR uint8_t *dst = malloc(pcam->fmt.fmt.pix.width *
                                     pcam->fmt.fmt.pix.height * 3 / 2);
+
           if (!dst)
             {
               return -ENOMEM;
@@ -188,6 +190,7 @@ err:
   return 0;
 #else
   FAR uint32_t *pbuf = (FAR uint32_t *)pcam->bufs[buf->index];
+
   vinfo("show image from %p: %" PRIx32 " %" PRIx32, pbuf, pbuf[0], pbuf[1]);
   return 0;
 #endif
